@@ -8,11 +8,11 @@ urlpatterns=[
     # post-create
     url(r'^create/$',post_create,name="post-create"),
     #post-detail
-    url(r'^detail/$',post_detail,name="post-detail"),
+    url(r'^(?P<id>\d+)/$',post_detail,name="post-detail"),
     #post-delete
-    url(r'^delete/$',post_delete,name="post-delete"),
+    url(r'^(?P<id>\d+)/delete/$',post_delete,name="post-delete"),
     #post-update
-    url(r'^update/$',post_update,name="post-update"),
+    url(r'^(?P<id>\d+)/edit/$',post_update,name="post-update"),
 
 
 ]
