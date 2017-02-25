@@ -1,8 +1,21 @@
 <!--DOCTYPE html -->
+{% load staticfiles %}
 <html>
 <head>
 <title>
     {% block title %}{% endblock %}</title>
+
+    <!-- THird Party Css -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+
+
+    <!-- CUstom CSS-->
+    <link ref='styleshhet' href="{% static 'css/base.css' %}">
 
     {% block head %}{% endblock %}
 
@@ -15,5 +28,9 @@
 
         {% endblock %}
     </div>
+
+    <!-- THird Party Js -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

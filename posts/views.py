@@ -3,13 +3,27 @@ from django.http import HttpResponse,HttpResponseRedirect
 from models import Post
 from forms import PostForm
 from django.contrib import messages
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 # Create your views here.
 
 # post-list view
 def post_list(request):
-    queryset=Post.objects.all()
+    queryset_list=Post.objects.all()
+    paginator=Paginator(queryset_list,2)
+    current_page="page"
+    page=request.GET.get(current_page)
+    try:
+        queryset=paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an integer return first page
+        queryset=paginator.page(1)
+
+    except EmptyPage:
+        # if page is out of range return last page
+        queryset=paginator.page(page.num_pages)
     context={
-        "object_list":queryset
+        "object_list":queryset,
+        'current_page':current_page
     }
     return render(request,'post_list.html',context)
 

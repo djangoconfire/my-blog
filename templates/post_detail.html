@@ -2,11 +2,11 @@
 
 
 {% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <p>{{ instance.title }}<small>{{ instance.timestamp }}<br/></small></p>
+            <p>{{ instance.content|linebreaks }}</p>
 
-    {{ instance.title }}<br/>
-    {{ instance.content }}<br/>
-    {{ instance.timestamp }}<br/>
-    {{ instance.updated }}<br/>
-    {{ instance.id }}<br/>
-
+        </div>
+    </div>
 {% endblock %}
