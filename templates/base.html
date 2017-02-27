@@ -12,12 +12,15 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
-
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' >
 
     <!-- CUstom CSS-->
     <link ref='styleshhet' href="{% static 'css/base.css' %}">
 
     {% block head %}{% endblock %}
+
+    {% block head_extra %}
+    {% endblock %}
 
 </head>
 

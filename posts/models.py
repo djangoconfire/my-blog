@@ -7,6 +7,8 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 
 from django.utils.text import slugify
+from django.utils.safestring import mark_safe
+from markdown_deux import markdown
 
 #utility function
 def upload_location(instance, filename):
@@ -37,6 +39,12 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+
+    # Markdown the text
+    def get_markdown(self):
+        content=self.content
+        markdown_text=markdown(content)
+        return mark_safe(markdown_text)
 
 
 

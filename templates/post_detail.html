@@ -39,10 +39,19 @@
 
             <!--<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a>-->
             <div class="content-markdown">
-                <p>{{ instance.content|linebreaks }}</p>
+                <p>{{ instance.get_markdown }}</p>
             </div>
             <hr/>
-            <br/>
+            <p>Comments</p>
+            {% for comment in comments %}
+                {{comment.content_object}}
+                <div class=''>
+                     {{ comment.content }}
+                    <br/>
+                    <small>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago</small>
+                    <hr/>
+                </div>
+            {% endfor %}
             <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
 
         </div>

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'posts',
     # third-party
     'crispy_forms',
+    'pagedown',
+    'markdown_deux',
 ]
 
 MIDDLEWARE = [
