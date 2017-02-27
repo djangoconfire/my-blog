@@ -33,12 +33,32 @@
 
     {% include "messages_display.html" %}
     <div class='container'>
-        {% block content %}
+        {% include "navbar.html" %}
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="profile-wrapper">
+                    <img src="{% static 'images/profile.jpg' %}" class='img-responsive img-rounded ' style="border-radius:100px;width:200px;height:200px;">
+                    <div class="social-link">
+                        <p style='font-weight:bolder;font-size:20px;'>RituRaj</p>
+                        <small>@ritupycon</small>
+                        <p><span><img src="{% static 'images/github.png' %}" style="width:30px;height:30px;">
+                            <img src="{% static 'images/linkedin.png' %}" style="width:30px;height:30px;"></span></p>
+                    </div>
+                </div>
+            </div>
 
-        {% endblock %}
+            <div class="col-sm-9">
+                 {% block content %}
+
+                 {% endblock %}
+            </div>
+        </div>
+
+
     </div>
 
     <!-- THird Party Js -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

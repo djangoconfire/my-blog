@@ -1,27 +1,30 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block title %}Posts{% endblock %}
 
 {% block content %}
-    <h1>List of Posts</h1>
-    {% for obj in object_list %}
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="thumbnail">
-                       {% if obj.image %}
-                            <img src="{{obj.image.url}}" class="img-responsive img-rounded" >
-                        {% endif %}
-                      <div class="caption">
-                            <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.timestamp|timesince }} ago</small></h3>
-                            {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
-                            <p>{{ obj.content|linebreaks|truncatechars:120 }}</p>
-                            <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
-                      </div>
+    <div class="project-list-container">
+        <h1>Project List</h1>
+        {% for obj in object_list %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="thumbnail">
+                           {% if obj.image %}
+                                <img src="{{obj.image.url}}" class="img-responsive img-rounded" >
+                            {% endif %}
+                          <div class="caption">
+                                <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.timestamp|timesince }} ago</small></h3>
+                                {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+                                <p>{{ obj.content|linebreaks|truncatechars:120 }}</p>
+                                <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+                          </div>
+                    </div>
                 </div>
+                 <hr/>
             </div>
-             <hr/>
-        </div>
-    {% endfor %}
+        {% endfor %}
+
+    </div>
 
     <!--Paginator starts here -->
 
