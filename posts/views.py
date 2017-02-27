@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse,HttpResponseRedirect,Http404
+from django.db.models import Q
 from models import Post
 from forms import PostForm
 from django.contrib import messages
@@ -10,6 +11,12 @@ from urllib import quote_plus
 # post-list view
 def post_list(request):
     queryset_list=Post.objects.all()
+    query=request.GET.get('q')
+    print query
+    if query:
+        queryset_list=queryset_list.filter(Q(title__icontains=query) |
+                                           Q(content__icontains=query)
+                                           ).distinct()
     paginator=Paginator(queryset_list,2)
     current_page="page"
     page=request.GET.get(current_page)
