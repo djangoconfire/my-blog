@@ -16,6 +16,7 @@ class Post(models.Model):
     user                = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title               = models.CharField(max_length=120)
     slug                = models.SlugField(null=True,unique=True)
+    project_url         =models.URLField(default=0,blank=True)
     image               = models.ImageField(upload_to=upload_location,
                                             null=True,
                                             blank=True,

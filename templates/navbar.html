@@ -12,7 +12,9 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/posts/">Project</a></li>
-                <li><a href="/posts/create/"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add New Post</a></li>
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                    <li><a href="/posts/create/"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add New Post</a></li>
+                {% endif %}
                 <li><a href="">About</a></li>
             </ul>
         </div>
