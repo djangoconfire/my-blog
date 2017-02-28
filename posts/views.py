@@ -8,6 +8,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from urllib import quote_plus
 from django.contrib.contenttypes.models import ContentType
 from comments.models import Comment
+from comments.forms import CommentForm
 # Create your views here.
 
 # post-list view
@@ -58,14 +59,29 @@ def post_create(request):
 def post_detail(request,slug=None):
     instance=get_object_or_404(Post,slug=slug)
     share_string=quote_plus(instance.content)
-    content_type=ContentType.objects.get_for_model(Post)
-    obj_id=instance.id
-    comments=Comment.objects.filter(content_type=content_type,object_id=obj_id)
+    initial_data={
+        'content_type':instance.get_content_type,
+        'object_id':instance.id
+    }
+    form=CommentForm(request.POST or None, initial=initial_data)
+    if form.is_valid():
+        c_type=form.cleaned_data.get('content_type')
+        content_type=ContentType.objects.get(model=c_type)
+        obj_id=form.cleaned_data.get('object_id')
+        content_data=form.cleaned_data.get('content')
+        new_comment, created=Comment.objects.get_or_create(
+                                                            user=request.user,
+                                                            content_type=content_type,
+                                                            object_id=obj_id,
+                                                            content=content_data
+                                                            )
+    comments=instance.comments
     context={
         "title":instance.title,
         "instance":instance,
         'share_string':share_string,
-        'comments':comments
+        'comments':comments,
+        'comment_form':form
     }
 
     return render(request,'post_detail.html',context)
