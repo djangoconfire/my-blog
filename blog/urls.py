@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
+from ang.views import AngularTemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,6 +26,7 @@ urlpatterns = [
     # api urls here
     url(r'^api/posts/',include('posts.api.urls',namespace='posts-api')),
     url(r'^api/comments/',include('comments.api.urls',namespace='comments-api')),
+    url(r'^api/templates/(?P<item>[A-Za-z0-9\_\-\.\/]+)\.html$', AngularTemplateView.as_view())
 ]
 
 if settings.DEBUG:
